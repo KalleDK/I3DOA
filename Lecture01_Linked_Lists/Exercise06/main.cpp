@@ -44,4 +44,11 @@ int main(void) {
 	LLToolkit::print(flaf);
 	LLToolkit::rotateLeft(flaf);
 	LLToolkit::print(flaf);
+	Node* g = new Node(6);
+	LLToolkit::print(g);
+	LLToolkit::rotateLeft(g);
+	LLToolkit::print(g);
+	
+	
+	
 }

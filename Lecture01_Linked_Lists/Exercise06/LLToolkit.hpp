@@ -14,7 +14,7 @@ public:
 	static void reverse(Node*& headPtr);
 	static Node* split(Node* splitPtr);
 	static Node* build(int* values, size_t n);
-	static void join(Node* head1, Node* head2);
+	static void join(Node*& head1, Node* head2);
 	static void rotateLeft(Node*& head);
 	static void rotateRight(Node*& head);
 
