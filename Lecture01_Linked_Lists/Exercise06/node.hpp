@@ -1,11 +1,15 @@
 #pragma once
 #include<iostream>
 
+template <typename T>
 class Node
 {
 public:
-	Node(int info = 0, Node* next = NULL);
-	int info;
+	Node(T info = T(), Node* next = NULL) {
+		this->next = next;
+		this->info = info;
+	}
+	T info;
 	Node* next;
 
 };

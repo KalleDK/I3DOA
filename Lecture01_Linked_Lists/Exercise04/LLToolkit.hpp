@@ -38,7 +38,7 @@ public:
 		return headPtr;
 	}
 
-	static clear(Node<T>*& headPtr) {
+	static void clear(Node<T>*& headPtr) {
 		while (headPtr != NULL) {
 			headRemove(headPtr);
 		}

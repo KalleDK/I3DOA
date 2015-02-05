@@ -1,9 +1,9 @@
-SOURCES=main.cpp node.cpp LLToolkit.cpp
+SOURCES=main.cpp
 OBJECTS=${SOURCES:.cpp=.o}
 EXECUTABLE=main
 CXX=clang++
 
-all: ${OBJECTS}
+all: ${OBJECTS} node.hpp LLToolkit.hpp
 	  @${CXX} -o ${EXECUTABLE} ${OBJECTS}
 
 %.o: %.cpp
@@ -25,5 +25,5 @@ help:
 	@echo "  EXECUTABLE"
 	@echo "" 
 
-run: main
+run:
 	./main
