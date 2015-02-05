@@ -1,0 +1,15 @@
+Exercise 1:
+Show the output of the following sequence of statements:
+pq.push(9, MED);
+pq.push(4, HIGH);
+pq.push(1, LOW);
+cout << pq.front();
+pq.push(2, MED);
+cout << pq.front();
+pq.pop();
+cout << pq.front();
+pq.pop();
+pq.pop();
+cout << pq.front();
+
+4491

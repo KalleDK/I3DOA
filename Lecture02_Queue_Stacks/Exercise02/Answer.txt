@@ -1,0 +1,24 @@
+Exercise 2
+Node* Q[5]
+Q[LOW] = NULL
+..
+..
+Q[HIGH] = NULL
+
+push(info, level)
+	tailInsert(Q[LEVEL], info)
+	
+front()
+   if Q[HIGH] != NULL
+		return Q[HIGH]->info
+	else
+		...
+		...
+		...
+			if Q[LOW] != NULL
+				return Q[LOW]->info
+				
+				
+				
+	
+Exercise03
