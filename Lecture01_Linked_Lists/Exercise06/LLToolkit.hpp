@@ -14,7 +14,7 @@ public:
 	static void headRemove(Node<T>*& headPtr) {
 		Node<T>* tempPtr = headPtr;
 		headPtr = headPtr->next;
-		free(tempPtr);
+		delete(tempPtr);
 	}
 
 	static void insert(Node<T>* prevPtr, T info) {
@@ -24,7 +24,7 @@ public:
 	static void remove(Node<T>* prevPtr) {
 		Node<T>* tempPtr = prevPtr->next;
 		prevPtr->next = prevPtr->next->next;
-		free(tempPtr);
+		delete(tempPtr);
 	}
 
 	static Node<T>* copy(Node<T>* sourcePtr) {
