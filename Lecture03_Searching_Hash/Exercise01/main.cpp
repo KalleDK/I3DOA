@@ -15,10 +15,22 @@ int main(int argc, char **argv) {
 	if (argc < 2) {
 		return 1;
 	}
-	istringstream ss(argv[1]);
-	if(!(ss >> key)) {
-		return 2;
+	cout << argc << endl;
+	for (int i=1; i < argc; ++i) {
+		cout << " " << argv[i] << " |";
 	}
-	cout << h(key);
+	cout << endl;
+	for (int i=1; i < argc; ++i) {
+		cout << "----|";
+	}
+	cout << endl;
+	for (int i=1; i < argc; ++i) {
+		istringstream ss(argv[i]);
+		if(!(ss >> key)) {
+			cout << " Error | ";
+		} 
+		cout << " " << h(key) << " | ";
+	}
+	cout << endl;
 	return 0;
 }
