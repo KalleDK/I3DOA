@@ -1,5 +1,7 @@
 Exercise 1: Triangle
 Design, implement, and test the function triangle() below.
+
+´´´cpp
 // Precondition: m <= n
 // Postcondition: The function has printed a pattern of lines so that the
 // first line contains m stars, the next line contains m+1 stars, and so on
@@ -15,3 +17,4 @@ Design, implement, and test the function triangle() below.
 // ****
 */
 void triangle(unsigned int m, unsigned int n)
+´´´
