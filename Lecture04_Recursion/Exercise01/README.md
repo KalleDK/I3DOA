@@ -18,3 +18,17 @@ Design, implement, and test the function triangle() below.
 //
 void triangle(unsigned int m, unsigned int n)
 ```
+
+#### 1. State the problem in terms of its size/complexity
+
+
+#### 2. Find, state and handle the base case (BC).
+m == n, print m starts x 2
+
+#### 3. Find, state and handle the recursive case (RC) and ensure progress towards the BC
+print m stars
+triangle(m+1,n)
+print m stars
+
+#### 4. Ensure that the RC reaches the BC
+As m < n, and we keep calling triangle where we increment m will become n
