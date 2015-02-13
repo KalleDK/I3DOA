@@ -1,4 +1,4 @@
-Exercise 1: Triangle
+# Exercise 1: Triangle
 Design, implement, and test the function triangle() below.
 
 ```cpp
