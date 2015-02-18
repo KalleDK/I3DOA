@@ -20,10 +20,11 @@ void triangle(unsigned int m, unsigned int n)
 ```
 
 #### 1. State the problem in terms of its size/complexity
-
+funktionen triangle(m, n) udskriver en linie med m stjerner og derefter linier hvor den tilføjer 1 stjerne per linie, indtil den har lavet en linie med n stjerner. Derefter gentager den det bagfra.
+Kompleksiteten er derfor (n-m)
 
 #### 2. Find, state and handle the base case (BC).
-m == n, print m starts x 2
+If m > n return
 
 #### 3. Find, state and handle the recursive case (RC) and ensure progress towards the BC
 print m stars
@@ -31,4 +32,5 @@ triangle(m+1,n)
 print m stars
 
 #### 4. Ensure that the RC reaches the BC
-As m < n, and we keep calling triangle where we increment m will become n
+As m < n, and we keep calling triangle where we increment m will become greater than n
+(Standard heltals argument)
