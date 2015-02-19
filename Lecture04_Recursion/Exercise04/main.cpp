@@ -1,8 +1,8 @@
 #include <iostream>
 
 void print_stars(int n, int i) {
-	if (n == 1) {
-		std::cout << std::string(i, ' ') << "*\n";
+	if (n == 0) {
+		return;
 	}
 	else {
 		print_stars(n/2, i);
@@ -12,5 +12,5 @@ void print_stars(int n, int i) {
 }
 
 int main(int narg, char *argv[]) {
-	print_stars(8, 0);
+	print_stars(8, 2);
 }
