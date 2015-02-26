@@ -4,40 +4,31 @@
 //	}
 // }
 
-#include <iostream>
+#include <algorithm>
 #include <string>
+#include <iostream>
+#include <cctype>
 
-using namespace std;
-
-bool isvalidChar(char c) {
-	return ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || ((c >= '0') && (c <= '9'));
-}
-
-bool _palidrome(string str, int fpos, int epos) {
-	while ((fpos < epos) && (!isvalidChar(str[fpos]))) {
-		++fpos;
-	} 
-	while ((fpos < epos) && (!isvalidChar(str[epos]))) {
-		--epos;
-	} 
-	if (epos <= fpos) {
+bool _palidrome(std::string str, int fpos) {
+	if (fpos >= (str.length()/2)) {
 		return true;
 	}
-	if (str[fpos] == str[epos]) {
-		return true && _palidrome(str, fpos+1, epos-1);
+	if (str[fpos] == str[str.length()-1-fpos]) {
+		return true && _palidrome(str, fpos+1);
 	} else {
 		return false;
 	}
 
 }
 
-bool palidrome(string str) {
-	return	_palidrome(str, 0, str.length()-1);
+bool palidrome(std::string str) {
+	str.erase(std::remove_if(str.begin(), str.end(), [](char ch){return !isalpha(ch);}), str.end());
+	return	_palidrome(str, 0);
 }
 
 int main(void) {
-	cout << palidrome("KaololaK") << endl;
-	cout << palidrome("KaollolaK") << endl;
-	cout << palidrome("fl' affalf") << endl;
-	cout << palidrome("flaf1falf") << endl;
+	std::cout << palidrome("KaololaK") << std::endl;
+	std::cout << palidrome("KaollolaK") << std::endl;
+	std::cout << palidrome("fl' affalf") << std::endl;
+	std::cout << palidrome("flaf1falf") << std::endl;
 }

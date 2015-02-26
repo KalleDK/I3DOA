@@ -1,13 +1,14 @@
 SOURCES=main.cpp
 OBJECTS=${SOURCES:.cpp=.o}
 EXECUTABLE=main
+CXXFLAGS=-std=c++11
 CXX=clang++
 
 all: ${OBJECTS}
 	  @${CXX} -o ${EXECUTABLE} ${OBJECTS}
 
 %.o: %.cpp
-	@${CXX} -c -o $@ $^
+	${CXX} ${CXXFLAGS} -c -o $@ $^
 
 clean: 
 	@rm -f ${EXECUTABLE} ${OBJECTS}
