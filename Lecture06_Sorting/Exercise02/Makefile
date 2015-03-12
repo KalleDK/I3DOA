@@ -10,7 +10,7 @@ SOURCES=${SRC_DIR}/main.cpp
 OBJECTS=${SOURCES:${SRC_DIR}/%.cpp=${BUILD_DIR}/%.o}
 DEPS=${SOURCES:${SRC_DIR}/%.cpp=${BUILD_DIR}/%.d}
 EXECUTABLE=main
-CXXFLAGS=-lpthread
+CXXFLAGS=
 MAKEFILE_TARGETS_WITHOUT_INCLUDE := clean help 
 
 ifeq (${ARCH},target)
@@ -32,7 +32,7 @@ ${EXECUTABLE}: ${OBJECTS}
 
 ${BUILD_DIR}/%.d: ${SRC_DIR}/%.cpp
 	@${MKDIR} ${BUILD_DIR}
-	@${CXX} -MT $(@:.d=.o) -MM $< > $@
+	@${CXX} -MT $(@:.d=.o) -MM $< ${CXXFLAGS} > $@
 	@${ECHO} '	$${CXX} -c -o $$@ $$< $${CXXFLAGS}' >> $@
 
 clean:

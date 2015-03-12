@@ -1,16 +1,18 @@
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
-#define ARRAY_SIZE 2000
+#define ARRAY_SIZE 100000
 
 template<class T>
 void insertionsort(T* arr, const int size) {
 	int mover;
+	int j;
 	for (int i = 1; i < size; ++i) {
-		int j = i;
+		j = i;
 		while(j > 0 && arr[j-1] > arr[j]) {
 			swap(arr[j-1], arr[j]);
 			--j;
@@ -19,7 +21,7 @@ void insertionsort(T* arr, const int size) {
 }
 
 template<class T>
-void quicksort(T data[], int first, int last, int bc) {
+void quicksort2(T data[], int first, int last, int bc) {
 	if (first + bc > last) {
 		insertionsort<T>(&data[first], last-first+1);
 	} else {
@@ -40,14 +42,14 @@ void quicksort(T data[], int first, int last, int bc) {
 		//Move pivot to center
 		swap(data[upper], data[first]);
 		if (first < upper - 1)
-			quicksort(data, first, upper - 1, bc);
+			quicksort2(data, first, upper - 1, bc);
 		if (upper + 1 < last)
-			quicksort(data, upper + 1, last, bc);
+			quicksort2(data, upper + 1, last, bc);
 	}
 }
 
 template<class T>
-void quicksort(T data[], const int n, const int bc) {
+void quicksort2(T data[], const int n, const int bc) {
 	int i, max;
 	if (n < 2)
 		return;
@@ -55,20 +57,71 @@ void quicksort(T data[], const int n, const int bc) {
 		if (data[max] < data[i])	// element and put it
 			max = i;		// at the end of data[];
 	swap(data[n - 1], data[max]);		// largest el is now in its
-	quicksort(data, 0, n - 2, bc);		// final position;
+	quicksort2(data, 0, n - 2, bc);		// final position;
+}
+
+template<class T>
+void quicksort(T data[], int first, int last) {
+	int lower = first + 1, upper = last;
+	swap(data[first], data[(first + last) / 2]);
+	T bound = data[first];
+	while (lower <= upper) {
+		while (data[lower] < bound)
+			lower++;
+		while (bound < data[upper])
+			upper--;
+		if (lower < upper)
+			swap(data[lower++], data[upper--]);
+		else lower++;
+	}
+	swap(data[upper], data[first]);
+	if (first < upper - 1)
+		quicksort(data, first, upper - 1);
+	if (upper + 1 < last)
+		quicksort(data, upper + 1, last);
+}
+
+template<class T>
+void quicksort(T data[], const int n) {
+	int i, max;
+	if (n < 2)
+		return;
+	for (i = 1, max = 0; i < n; i++)// find the largest
+		if (data[max] < data[i])    // element and put it
+			max = i;                // at the end of data[];
+	swap(data[n - 1], data[max]); // largest el is now in its
+	quicksort(data, 0, n - 2);     // final position;
+}
+
+void copyArray(const int* from, int* to, const int size) {
+	for (int i = 0; i < size; ++i) {
+		to[i] = from[i];	
+	}
 }
 
 
 int main(void) {
+	int resdiv = 1000;
+	long long microsec = 0;
 	srand (time(NULL));
-	int arr[ARRAY_SIZE];
+	int arr_sortme[ARRAY_SIZE];
+	int arr_org[ARRAY_SIZE];
 	for (int i = 0; i < ARRAY_SIZE; ++i) {
-		arr[i] = rand() % ARRAY_SIZE;
+		arr_org[i] = rand() % ARRAY_SIZE;
 	}
-	//insertionsort(arr, ARRAY_SIZE);
-	quicksort<int>(arr, ARRAY_SIZE, 20);
-	for (int i  = 1; i < ARRAY_SIZE; ++i) {
-		if (arr[i-1] > arr[i]) {cout << "Error\n";}
+	for (int j = 1; j < 60; j+=4) {
+		copyArray(arr_org, arr_sortme, ARRAY_SIZE);
+		auto start = std::chrono::high_resolution_clock::now();
+		quicksort2<int>(arr_sortme, ARRAY_SIZE, j);
+		auto elapsed = std::chrono::high_resolution_clock::now() - start;
+		microsec = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+		std::cout << "C " << std::string(microsec / resdiv, '#') << "  " <<  microsec << "\n";
+		copyArray(arr_org, arr_sortme, ARRAY_SIZE);
+		start = std::chrono::high_resolution_clock::now();
+		quicksort<int>(arr_sortme, ARRAY_SIZE);
+		elapsed = std::chrono::high_resolution_clock::now() - start;
+		microsec = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+		std::cout << "P " << std::string(microsec / resdiv, '-') << "  " <<  microsec << "\n";
 	}
 	return 0;
 }
