@@ -2,44 +2,38 @@
 #include <string>
 
 #include "BTNode.hpp"
-#include "BTNodeToolkit.hpp"
+#include "AVLNodeToolkit.hpp"
 
 int main(void)
 {
 	BTNode<int>* root = NULL;
-	BTNodeToolkit<int>::insert(root, 5);
-	BTNodeToolkit<int>::insert(root, 6);
-	BTNodeToolkit<int>::insert(root, 7);
-	BTNodeToolkit<int>::insert(root, 8);
-	BTNodeToolkit<int>::insert(root, 0);
-	BTNodeToolkit<int>::insert(root, 6);
-	BTNodeToolkit<int>::insert(root, 6);
-	BTNodeToolkit<int>::insert(root, 2);
+	BTNode<int>* result = NULL;
+	AVLNodeToolkit<int>::insert(root, 5);
+	AVLNodeToolkit<int>::insert(root, 6);
+	AVLNodeToolkit<int>::insert(root, 7);
+	AVLNodeToolkit<int>::insert(root, 8);
+	AVLNodeToolkit<int>::insert(root, 0);
+	AVLNodeToolkit<int>::insert(root, 6);
+	AVLNodeToolkit<int>::insert(root, 6);
+	AVLNodeToolkit<int>::insert(root, 2);
+	std::cout << "Sum: " << AVLNodeToolkit<int>::sum(root) << "\n";
+	std::cout << "Search 4: " << AVLNodeToolkit<int>::search(root, result, 4) << "\n";
+	std::cout << "Search 7: " << AVLNodeToolkit<int>::search(root, result, 7);
+	std::cout << " " << result->data  << "\n";
+	std::cout << "Depth : " << AVLNodeToolkit<int>::getDepth(root) << "\n";
 	std::cout << "Print:\n";
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Sum: " << BTNodeToolkit<int>::sum(root) << "\n";
-	std::cout << "Search 4: " << BTNodeToolkit<int>::search(root, 4) << "\n";
-	std::cout << "Search 7: " << BTNodeToolkit<int>::search(root, 7) << "\n";
-	std::cout << "Depth : " << BTNodeToolkit<int>::getDepth(root) << "\n";
-	root = BTNodeToolkit<int>::rotateRight(root);
+	AVLNodeToolkit<int>::printFull(root, 0, 3);
+	AVLNodeToolkit<int>::rotateRight(root);
+	root = root->parent;
 	std::cout << "Print Rotate right:\n";
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate right:\n";
-	root->right = BTNodeToolkit<int>::rotateRight(root->right);
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate left:\n";
-	root->right = BTNodeToolkit<int>::rotateLeft(root->right);
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate left:\n";
-	root->right = BTNodeToolkit<int>::rotateLeft(root->right);
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate left:\n";
-	BTNodeToolkit<int>::rotateRight(root->right->left);
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate left:\n";
-	BTNodeToolkit<int>::rotateLeft(root->right->right);
-	BTNodeToolkit<int>::print(root);
-	std::cout << "Print Rotate left:\n";
-	BTNodeToolkit<int>::rotateLeft(root->right);
-	BTNodeToolkit<int>::print(root);
+	AVLNodeToolkit<int>::printFull(root, 0, 3);
+	std::cout << "Print Remove:\n";
+	AVLNodeToolkit<int>::remove(root,6);
+	AVLNodeToolkit<int>::printFull(root, 0, 3);
+	std::cout << "Print Remove:\n";
+	AVLNodeToolkit<int>::remove(root,8);
+	AVLNodeToolkit<int>::printFull(root, 0, 3);
+	std::cout << "Print Remove:\n";
+	AVLNodeToolkit<int>::remove(root,2);
+	AVLNodeToolkit<int>::printFull(root, 0, 3);
 }
