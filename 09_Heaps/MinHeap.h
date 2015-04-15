@@ -11,6 +11,18 @@ class MinHeap
 {
 public:
 
+	MinHeap() {}
+
+	MinHeap(const vector<T>& ar)
+	{
+		heap = ar;
+		size_t start = parent(heap.size()-1);
+		for (size_t i = start; i > 0; --i) {
+			percolateDown(i);
+		}
+		percolateDown(0);
+	}
+
 	void print() const
 	{
 		for(auto it = heap.begin(); it != heap.end(); ++it)

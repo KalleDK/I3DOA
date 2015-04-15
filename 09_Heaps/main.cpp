@@ -26,5 +26,18 @@ int main(void)
 		std::cout << "Is NOT Heap " << std::endl;
 
 	h.print();
+
+	vector<int> j;
+	j.push_back(23);
+	j.push_back(21);
+	j.push_back(13);
+	j.push_back(54);
+	j.push_back(9);
+	j.push_back(0);
+	j.push_back(4);
+	j.push_back(12);
+	j.push_back(14);
+	MinHeap<int> h2(j);
+	h2.print();
 	return 0;
 }
