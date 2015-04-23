@@ -68,7 +68,6 @@ public:
 			return;
 		while (node->parent != NULL) {
 			node = node->parent;
-			
 		}
 		root = node;
 	}
